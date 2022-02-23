@@ -1,4 +1,17 @@
 <?php
+require "Connect.php";
+require "Config.php";
+
+$myConnexion = Connect::dbConnect();
+
+$stmt = $myConnexion->prepare("SELECT nom,prenom,rue,numero,code_postal,ville,pays,mail FROM user ");
+$state = $stmt->execute();
+
+if ($state) {
+    foreach ($stmt->fetchAll() as $user) {
+        echo "Utilisateur: ".$user['nom']. " ".$user['prenom']. " ".$user['rue']. " ".$user['numero']. " "
+    }
+}
 
 /**
  * 1. Importez le fichier SQL se trouvant dans le dossier SQL.
